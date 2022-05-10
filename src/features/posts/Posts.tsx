@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
 import { AppDispatch } from '../../app/store';
 import { selectPosts, fetchPostsAsync, selectStatus, Statuses } from './postSlice';
+import Post from './Post';
+import PostForm from './PostForm';
 
 // useAppDispatch can not be used inside a callback function like in useEffect.
 // That is why we are going to use simple useDispatch hook.
 
-function Post() {
+function Posts() {
   const posts = useAppSelector(selectPosts);
   const status = useAppSelector(selectStatus);
   const dispatch = useDispatch<AppDispatch>();
@@ -24,10 +26,13 @@ function Post() {
     contents = <div className="card">
       <div className="card-body">
         <h3>{status}</h3>
+        <PostForm />
         {posts && posts.length > 0 && posts.map(post => {
           return <div className="key" key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
+            <Post
+              dispatch={dispatch}
+              post={post}
+            />
           </div>
         })}
       </div>
@@ -42,4 +47,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default Posts;
