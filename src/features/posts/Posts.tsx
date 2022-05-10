@@ -25,7 +25,7 @@ function Post() {
       <div className="card-body">
         <h3>{status}</h3>
         {posts && posts.length > 0 && posts.map(post => {
-          return <div key={post.id} style={{margin:"5em"}}>
+          return <div className="key" key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.body}</p>
           </div>
